@@ -1,4 +1,4 @@
-- if @current_role_user.try(:is_admin?)
+- if @current_role_user.try(:is_admin?) and @user.new_record?
   - prms = {url: create_by_admin_users_path()}
 - else
   - prms = {}
