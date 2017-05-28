@@ -25,12 +25,12 @@ change_form_tariff = ->
     window.datepicker_activation_by_item(elem)
 
 all_actions = ->
-  if( $("#new-automobile-form").length > 0 )
+  if( $("#new-form").length > 0 )
     elem = $(".automobile-main-fields")
     elem.html(elem.attr("data-content-new"))
     elem = $(".tariff-main-fields")
     elem.html(elem.attr("data-content-new"))
-    
+
   change_form_automobile()
   change_form_tariff()
 

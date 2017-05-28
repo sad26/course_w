@@ -1,31 +1,64 @@
-= form_for @driver do |f|
-  - if @driver.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@driver.errors.count, "error")} prohibited this driver from being saved:"
-      %ul
-        - @driver.errors.full_messages.each do |message|
-          %li= message
 
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :patronymic
-    = f.text_field :patronymic
-  .field
-    = f.label :date_of_birth
-    = f.date_select :date_of_birth
-  .field
-    = f.label :itn
-    = f.text_field :itn
-  .field
-    = f.label :passport
-    = f.text_field :passport
-  .field
-    = f.label :automobile
-    = f.text_field :automobile
+= form_for @driver do |f|
+  = error_messages_for @driver
+  .row
+    .col-md-6
+      .form-group
+        = f.label :last_name
+        = f.text_field :last_name, class: 'form-control'
+        = f.error_messages_for(:last_name)
+    .col-md-6
+      .form-group
+        = f.label :first_name
+        = f.text_field :first_name, class: 'form-control'
+        = f.error_messages_for(:first_name)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :patronymic
+        = f.text_field :patronymic, class: 'form-control'
+        = f.error_messages_for(:patronymic)
+    .col-md-6
+      .form-group
+        = f.label :date_of_birth
+        .input-group.date.datepicker
+          = f.text_field(:date_of_birth,
+          value: nilDate(f.object.date_of_birth),
+          class: 'form-control')
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+          = f.error_messages_for(:date_of_birth)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :itn
+        = f.text_field :itn, class: 'form-control'
+        = f.error_messages_for(:itn)
+    .col-md-6
+      .form-group
+        = f.label :passport
+        = f.text_field :passport, class: 'form-control'
+        = f.error_messages_for(:passport)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :automobile_id
+        -# automobile_options() в automobiles_helper
+        -# При выборе текущего авто, его можно изменять, при выборе нового,
+        -# поля для него скрываются, при выборе пустоты в авто -
+        -# можно создать новый.
+        = f.select :automobile_id, automobile_options(f.object.automobile_id),
+        {include_blank: true}, class: 'form-control automobile-select',
+        "data-current-id": f.object.automobile_id
+        = f.error_messages_for(:automobile_id)
+    .col-md-6
+      %fieldset.center
+        %legend Поля для автомобиля
+        .left.automobile-main-fields{"data-content-new": "#{new_automobile_form(f)}",
+          "data-content-exist": "#{exist_automobile_form(f)}"}
+          = f.fields_for(:automobile) do |fr|
+            = render 'orders/one_automobile_form', fr: fr
+
+
   .actions
-    = f.submit 'Save'
+    = f.submit nil, class: 'btn btn-primary', id: 'save'
