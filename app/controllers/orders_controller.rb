@@ -3,6 +3,21 @@ class OrdersController < ApplicationController
 
   before_action -> {check_app_auth ["admin", "operator"]}, except: [:show, :index]
 
+  def search
+    if params.has_key?('search')
+      @orders = Order.search(params['search'])
+    else
+      @orders = []
+    end
+    params['search'] ||= {}
+
+    # для ajax
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   # GET /orders
   # GET /orders.json
   def index
@@ -30,7 +45,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to @order, notice: 'Заказ успешно создан.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -44,7 +59,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: 'Заказ успешно обновлен.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -58,7 +73,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: 'Заказ успешно удалён.' }
       format.json { head :no_content }
     end
   end

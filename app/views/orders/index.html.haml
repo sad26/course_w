@@ -12,6 +12,9 @@
     = link_to new_order_path, class: 'btn btn-success' do
       = fa_icon :plus
       = t('buttons.new.order')
+    = link_to search_orders_path, class: 'btn btn-info' do
+      = fa_icon :search
+      = t('buttons.search.order')
 
 - @orders.each do |order|
   .row

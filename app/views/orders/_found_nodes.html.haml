@@ -1,0 +1,81 @@
+.page-header
+  %h1= t('forms.order_search.found') + ": " + @orders.size.to_s
+
+- if @orders.size > 0
+  - @orders.each do |order|
+    #search-table
+      .row
+        .col-md-1
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:id)
+              %tbody
+                %td.center
+                  = order.id
+        .col-md-5
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:time_of_travel)
+              %tbody
+                %td.center
+                  = order.time_of_travel
+        .col-md-6
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:automobile_id)
+              %tbody
+                %td.center
+                  = "#{order.automobile.automobile_model}, #{order.automobile.state_number} [#{order.automobile.automobile_type}]"
+      .row
+        .col-md-6
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:departure_address)
+              %tbody
+                %td.center
+                  = order.departure_address
+        .col-md-6
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:arrival_address)
+              %tbody
+                %td.center
+                  = order.arrival_address
+      .row
+        .col-md-5
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:tariff_id)
+              %tbody
+                %td.center
+                  = "#{order.tariff.name}: #{order.tariff.time_of_day}, #{order.tariff.range}, #{order.tariff.price_per_kilometer} руб./км"
+        .col-md-4
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:number_of_passengers)
+              %tbody
+                %td.center
+                  = order.number_of_passengers
+        .col-md-3
+          %table.table.table-striped
+            %thead
+              %tr
+                %th
+                  = Order.human_attribute_name(:length_of_route)
+              %tbody
+                %td.center
+                  = order.length_of_route

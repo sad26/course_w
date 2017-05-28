@@ -1,0 +1,177 @@
+=breadcrumb_tag do
+  %li.active
+    Поиск заказов
+  %li
+    = link_to 'Заказы', orders_path
+  %li
+    Таксопарк
+
+.page-header
+  %h1= t('headers.orders.search')
+
+= form_tag search_orders_path(), method: :get, remote: true do
+  %div{class: 'panel panel-info'}
+    .panel-heading
+      = t('forms.order_search.form.order')
+    .panel-body
+      .row
+        .col-md-4
+          .form-group
+            = Order.human_attribute_name(:time_of_travel)
+            .input-group.date.datetimepicker
+              = text_field_tag 'search[time_of_travel_from]',
+              params['search']['time_of_travel_from'],
+              class: 'form-control', placeholder: t('forms.order_search.from')
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+            .input-group.date.datetimepicker
+              = text_field_tag 'search[time_of_travel_to]',
+              params['search']['time_of_travel_to'],
+              class: 'form-control', placeholder: t('forms.order_search.to')
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+        .col-md-4
+          .form-group
+            = Order.human_attribute_name(:number_of_passengers)
+            = text_field_tag 'search[number_of_passengers]',
+            params['search']['number_of_passengers'],
+            class: 'form-control'
+        .col-md-4
+          .form-group
+            = Order.human_attribute_name(:length_of_route)
+            = text_field_tag 'search[length_of_route_from]',
+            params['search']['length_of_route_from'],
+            class: 'form-control', placeholder: t('forms.order_search.from')
+            = text_field_tag 'search[length_of_route_to]',
+            params['search']['length_of_route_to'],
+            class: 'form-control', placeholder: t('forms.order_search.to')
+      .row
+        .col-md-6
+          .form-group
+            = Order.human_attribute_name(:departure_address)
+            = text_field_tag 'search[departure_address]',
+            params['search']['departure_address'],
+            class: 'form-control'
+        .col-md-6
+          .form-group
+            = Order.human_attribute_name(:arrival_address)
+            = text_field_tag 'search[arrival_address]',
+            params['search']['arrival_address'],
+            class: 'form-control'
+  %div{class: 'panel panel-info'}
+    .panel-heading
+      = t('forms.order_search.form.tariff')
+    .panel-body
+      .row
+        .col-md-3
+          .form-group
+            = Tariff.human_attribute_name(:name)
+            = select_tag 'search[tariff_name]',
+            options_for_select(Tariff.all.map{|x| [x.name, x.name]}.sort),
+            {include_blank: true, class: 'form-control'}
+        .col-md-3
+          .form-group
+            = Tariff.human_attribute_name(:time_of_day)
+            = select_tag 'search[time_of_day]',
+            options_for_select(Tariff.all.map{|x| [x.time_of_day, x.time_of_day]}.uniq.sort),
+            {include_blank: true, class: 'form-control'}
+        .col-md-3
+          .form-group
+            = Tariff.human_attribute_name(:range)
+            = select_tag 'search[range]',
+            options_for_select(Tariff.all.map{|x| [x.range, x.range]}.uniq.sort),
+            {include_blank: true, class: 'form-control'}
+        .col-md-3
+          .form-group
+            = Tariff.human_attribute_name(:price_per_kilometer)
+            = text_field_tag 'search[price_per_kilometer_from]',
+            params['search']['price_per_kilometer_from'],
+            class: 'form-control', placeholder: t('forms.order_search.from')
+            = text_field_tag 'search[price_per_kilometer_to]',
+            params['search']['price_per_kilometer_to'],
+            class: 'form-control', placeholder: t('forms.order_search.to')
+  %div{class: 'panel panel-info'}
+    .panel-heading
+      = t('forms.order_search.form.automobile')
+    .panel-body
+      .row
+        .col-md-3
+          .form-group
+            = Automobile.human_attribute_name(:automobile_model)
+            = select_tag 'search[automobile_model]',
+            options_for_select(Automobile.all.map{|x| [x.automobile_model, x.automobile_model]}.uniq.sort),
+            {include_blank: true, class: 'form-control'}
+        .col-md-2
+          .form-group
+            = Automobile.human_attribute_name(:automobile_type)
+            = select_tag 'search[automobile_type]',
+            options_for_select(Automobile.all.map{|x| [x.automobile_type, x.automobile_type]}.uniq.sort),
+            {include_blank: true, class: 'form-control'}
+        .col-md-3
+          .form-group
+            = Automobile.human_attribute_name(:state_number)
+            = text_field_tag 'search[state_number]',
+            params['search']['state_number'],
+            {include_blank: true, class: 'form-control'}
+        .col-md-2
+          .form-group
+            = Automobile.human_attribute_name(:color)
+            = select_tag 'search[color]',
+            options_for_select(Automobile.all.map{|x| [x.color, x.color]}.uniq.sort),
+            {include_blank: true, class: 'form-control'}
+        .col-md-2
+          .form-group
+            = Automobile.human_attribute_name(:release)
+            = text_field_tag 'search[release]',
+            params['search']['release'],
+            {include_blank: true, class: 'form-control'}
+  %div{class: 'panel panel-info'}
+    .panel-heading
+      = t('forms.order_search.form.driver')
+    .panel-body
+      .row
+        .col-md-4
+          .form-group
+            = Driver.human_attribute_name(:last_name)
+            = text_field_tag 'search[driver_last_name]',
+            params['search']['driver_last_name'],
+            class: 'form-control'
+        .col-md-4
+          .form-group
+            = Driver.human_attribute_name(:first_name)
+            = text_field_tag 'search[driver_first_name]',
+            params['search']['driver_first_name'],
+            class: 'form-control'
+        .col-md-4
+          .form-group
+            = Driver.human_attribute_name(:patronymic)
+            = text_field_tag 'search[driver_patronymic]',
+            params['search']['driver_patronymic'],
+            class: 'form-control'
+      .row
+        .col-md-4
+          .form-group
+            = Driver.human_attribute_name(:date_of_birth)
+            .input-group.date.datepicker
+              = text_field_tag 'search[driver_date_of_birth]',
+              params['search']['driver_date_of_birth'],
+              class: 'form-control'
+              %span.input-group-addon
+                %span.glyphicon.glyphicon-calendar
+        .col-md-4
+          .form-group
+            = Driver.human_attribute_name(:itn)
+            = text_field_tag 'search[driver_itn]',
+            params['search']['driver_itn'],
+            class: 'form-control'
+        .col-md-4
+          .form-group
+            = Driver.human_attribute_name(:passport)
+            = text_field_tag 'search[driver_passport]',
+            params['search']['driver_passport'],
+            class: 'form-control'
+  .actions
+    = submit_tag t('buttons.search.order'), class: 'btn btn-primary', id: 'search-button'
+
+
+#insert-found-nodes

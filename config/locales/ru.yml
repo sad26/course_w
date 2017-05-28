@@ -27,6 +27,9 @@ ru:
       automobile: Новый автомобиль
       order: Новый заказ
       tariff: Новый тариф
+    search:
+      order: Найти заказы
+
   headers:
     users:
       edit: Редактирование пользователя
@@ -52,6 +55,17 @@ ru:
       index: Список заказов
       edit: Редактирование заказа
       new: Создание заказа
+      search: Поиск заказов
+  forms:
+    order_search:
+      form:
+        order: По атрибутам заказа
+        tariff: По атрибутам тарифа
+        automobile: По атрибутам автомобиля
+        driver: По атрибутам водителя
+      from: от
+      to: до
+      found: Найдено
   views:
     pagination:
       first: ⇤
