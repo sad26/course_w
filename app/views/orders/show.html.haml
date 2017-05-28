@@ -83,3 +83,12 @@
         %tbody
           %td.center
             = @order.length_of_route
+
+= link_to edit_order_path(@order), class: 'btn btn-info' do
+  = fa_icon :edit
+  = t('buttons.edit')
+= link_to @order, :method => :delete,
+:data => { :confirm => t('buttons.confirm.order') },
+class: 'btn btn-danger' do
+  = fa_icon :times
+  = t('buttons.destroy')

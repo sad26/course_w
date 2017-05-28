@@ -1,0 +1,26 @@
+= fr.hidden_field(:id)
+.col-md-12
+  .form-group
+    = fr.label :automobile_model
+    = fr.text_field :automobile_model, class: 'form-control'
+    = fr.error_messages_for(:automobile_model)
+.col-md-12
+  .form-group
+    = fr.label :automobile_type
+    = fr.text_field :automobile_type, class: 'form-control'
+    = fr.error_messages_for(:automobile_type)
+.col-md-12
+  .form-group
+    = fr.label :state_number
+    = fr.text_field :state_number, class: 'form-control'
+    = fr.error_messages_for(:state_number)
+.col-md-12
+  .form-group
+    = fr.label :color
+    = fr.text_field :color, class: 'form-control'
+    = fr.error_messages_for(:color)
+.col-md-12
+  .form-group
+    = fr.label :release
+    = fr.text_field :release, class: 'form-control'
+    = fr.error_messages_for(:release)

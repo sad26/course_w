@@ -6,4 +6,8 @@ module ApplicationHelper
   def breadcrumb_tag(&block)
     render 'application/breadcrumb', block: capture(&block)
   end
+
+  def nilTime(date)
+    date.nil? ? 'не указано' : DateTime.parse(date.to_s).strftime("%d.%m.%Y %H:%M")
+  end
 end

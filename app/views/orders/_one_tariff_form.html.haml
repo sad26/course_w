@@ -1,0 +1,25 @@
+= fr.hidden_field(:id)
+.col-md-12
+  .form-group
+    = fr.label :name
+    = fr.text_field :name, class: 'form-control'
+    = fr.error_messages_for(:name)
+.col-md-12
+  .form-group
+    = fr.label :time_of_day
+    = fr.select :time_of_day, ["День", "Ночь"],
+    {include_blank: true}, {class: 'form-control'}
+    = fr.error_messages_for(:time_of_day)
+.col-md-12
+  .form-group
+    = fr.label :range
+    = fr.select :range, ["в пределах МКАД", "за МКАД", "Подмосковье"],
+    {include_blank: true},  {class: 'form-control'}
+    = fr.error_messages_for(:range)
+.col-md-12
+  .form-group
+    = fr.label :price_per_kilometer
+    .input-group
+      = fr.text_field :price_per_kilometer, class: 'form-control'
+      %span.input-group-addon
+        %span.glyphicon.glyphicon-ruble

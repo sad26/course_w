@@ -71,6 +71,10 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:time_of_travel, :departure_address, :arrival_address, :number_of_passengers, :length_of_route, :automobile_id, :tariff_id)
+      params.require(:order).permit(:time_of_travel, :departure_address,
+        :arrival_address, :number_of_passengers, :length_of_route, :automobile_id, :tariff_id,
+        tariff_attributes: [:_destroy, :id, :name, :time_of_day, :range, :price_per_kilometer],
+        automobile_attributes: [:_destroy, :id, :automobile_model, :automobile_type,
+          :state_number, :color, :release])
     end
 end
