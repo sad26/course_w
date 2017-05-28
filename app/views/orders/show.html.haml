@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Time of travel:
+  = @order.time_of_travel
+%p
+  %b Departure address:
+  = @order.departure_address
+%p
+  %b Arrival address:
+  = @order.arrival_address
+%p
+  %b Number of passengers:
+  = @order.number_of_passengers
+%p
+  %b Length of route:
+  = @order.length_of_route
+%p
+  %b Automobile:
+  = @order.automobile
+%p
+  %b Tariff:
+  = @order.tariff
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

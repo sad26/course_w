@@ -1,0 +1,33 @@
+%h1 Listing orders
+
+%table
+  %thead
+    %tr
+      %th Time of travel
+      %th Departure address
+      %th Arrival address
+      %th Number of passengers
+      %th Length of route
+      %th Automobile
+      %th Tariff
+      %th
+      %th
+      %th
+
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.time_of_travel
+        %td= order.departure_address
+        %td= order.arrival_address
+        %td= order.number_of_passengers
+        %td= order.length_of_route
+        %td= order.automobile
+        %td= order.tariff
+        %td= link_to 'Show', order
+        %td= link_to 'Edit', edit_order_path(order)
+        %td= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Order', new_order_path

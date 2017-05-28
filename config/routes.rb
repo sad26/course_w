@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :drivers
+  resources :orders
+  resources :tariffs
+  resources :automobiles
   resources :role_users
   resources :roles
   resources :password_resets

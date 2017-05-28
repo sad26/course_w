@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @tariff.name
+%p
+  %b Time of day:
+  = @tariff.time_of_day
+%p
+  %b Range:
+  = @tariff.range
+%p
+  %b Price per kilometer:
+  = @tariff.price_per_kilometer
+
+= link_to 'Edit', edit_tariff_path(@tariff)
+\|
+= link_to 'Back', tariffs_path

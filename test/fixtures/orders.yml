@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  time_of_travel: 2017-05-28 11:45:54
+  departure_address: MyString
+  arrival_address: MyString
+  number_of_passengers: 1
+  length_of_route: 1.5
+  automobile_id: 
+  tariff_id: 
+
+two:
+  time_of_travel: 2017-05-28 11:45:54
+  departure_address: MyString
+  arrival_address: MyString
+  number_of_passengers: 1
+  length_of_route: 1.5
+  automobile_id: 
+  tariff_id: 

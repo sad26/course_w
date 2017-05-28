@@ -16,9 +16,17 @@ ru:
     confirm:
       user: Действительно удалить пользователя?
       role: Действительно удалить роль?
-    new: 
+      driver: Действительно удалить водителя?
+      automobile: Действительно удалить автомобиль?
+      order: Действительно удалить заказ?
+      tariff: Действительно удалить тариф?
+    new:
       user: Новый пользователь
       role: Новая роль
+      driver: Новый водитель
+      automobile: Новый автомобиль
+      order: Новый заказ
+      tariff: Новый тариф
   headers:
     users:
       edit: Редактирование пользователя
@@ -28,6 +36,22 @@ ru:
       index: Список возможных ролей пользователей
       edit: Редактирование роли
       new: Новая роль
+    automobiles:
+      index: Список автомобилей
+      edit: Редактирование автомобиля
+      new: Создание автомобиля
+    drivers:
+      index: Список водителей
+      edit: Редактирование водителя
+      new: Создание водителя
+    tariffs:
+      index: Список тарифов
+      edit: Редактирование тарифа
+      new: Создание тарифа
+    orders:
+      index: Список заказов
+      edit: Редактирование заказа
+      new: Создание заказа
   views:
     pagination:
       first: ⇤
@@ -38,6 +62,10 @@ ru:
   activerecord:
     models:
       user: Пользователь
+      automobile: Автомобиль
+      driver: Водитель
+      tariff: Тариф
+      order: Заказ
     attributes:
       user:
         email: Пользовательское имя/электронная почта
@@ -49,7 +77,7 @@ ru:
         activation_token_expires_at: Дата прекращения действия токена активации
         last_login_at: Время последнего входа в систему
         role_users: Роли
-      role: 
+      role:
         name: Обозначение
         info: Краткое название
         full_info: Описание
@@ -63,4 +91,32 @@ ru:
       user/role_users:
         <<: *role_users
       # nested_finish
-          
+      automobile:
+        automobile_model: Модель
+        automobile_type: Тип
+        state_number: Госномер
+        color: Цвет
+        release: Год выпуска
+      driver:
+        last_name: Фамилия
+        first_name: Имя
+        patronymic: Отчество
+        date_of_birth: Дата рождения
+        itn: ИНН
+        passport: Серия и номер паспорта
+        automobile_id: Автомобиль
+      tariff:
+        name: Название
+        time_of_day: Время суток
+        range: Дальности поездки с точки зрения удалённости от центра Москвы
+        price_per_kilometer: Цена за километр пути
+      order:
+        id: №
+        date_of_travel: Дата подачи такси
+        time_of_travel: Время подачи такси
+        departure_address: Адрес подачи такси
+        arrival_address: Адрес прибытия
+        number_of_passengers: Количество пассажиров
+        length_of_route: Длина маршрута
+        automobile_id: Автомобиль
+        tariff_id: Тариф

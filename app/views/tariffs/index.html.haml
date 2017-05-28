@@ -1,0 +1,27 @@
+%h1 Listing tariffs
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Time of day
+      %th Range
+      %th Price per kilometer
+      %th
+      %th
+      %th
+
+  %tbody
+    - @tariffs.each do |tariff|
+      %tr
+        %td= tariff.name
+        %td= tariff.time_of_day
+        %td= tariff.range
+        %td= tariff.price_per_kilometer
+        %td= link_to 'Show', tariff
+        %td= link_to 'Edit', edit_tariff_path(tariff)
+        %td= link_to 'Destroy', tariff, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Tariff', new_tariff_path

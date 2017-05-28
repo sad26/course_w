@@ -1,0 +1,29 @@
+%h1 Listing automobiles
+
+%table
+  %thead
+    %tr
+      %th Automobile model
+      %th Automobile type
+      %th State number
+      %th Color
+      %th Release
+      %th
+      %th
+      %th
+
+  %tbody
+    - @automobiles.each do |automobile|
+      %tr
+        %td= automobile.automobile_model
+        %td= automobile.automobile_type
+        %td= automobile.state_number
+        %td= automobile.color
+        %td= automobile.release
+        %td= link_to 'Show', automobile
+        %td= link_to 'Edit', edit_automobile_path(automobile)
+        %td= link_to 'Destroy', automobile, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Automobile', new_automobile_path

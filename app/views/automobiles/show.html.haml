@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Automobile model:
+  = @automobile.automobile_model
+%p
+  %b Automobile type:
+  = @automobile.automobile_type
+%p
+  %b State number:
+  = @automobile.state_number
+%p
+  %b Color:
+  = @automobile.color
+%p
+  %b Release:
+  = @automobile.release
+
+= link_to 'Edit', edit_automobile_path(@automobile)
+\|
+= link_to 'Back', automobiles_path

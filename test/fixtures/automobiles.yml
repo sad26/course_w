@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  automobile_model: MyString
+  automobile_type: MyString
+  state_number: MyString
+  color: MyString
+  release: 1
+
+two:
+  automobile_model: MyString
+  automobile_type: MyString
+  state_number: MyString
+  color: MyString
+  release: 1
