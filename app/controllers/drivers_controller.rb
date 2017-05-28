@@ -1,5 +1,6 @@
 class DriversController < ApplicationController
   before_action :set_driver, only: [:show, :edit, :update, :destroy]
+  before_action -> {check_app_auth ["admin", "operator"]}, except: [:show, :index]
 
   # GET /drivers
   # GET /drivers.json

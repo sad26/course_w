@@ -1,7 +1,14 @@
-%h1 Editing order
+=breadcrumb_tag do
+  %li.active
+    = t('headers.orders.edit')
+  %li
+    = link_to(@order.id, @order)
+  %li
+    = link_to 'Заказы', orders_path
+  %li
+    Таксопарк
+
+.page-header
+  %h1= t('headers.orders.edit')
 
 = render 'form'
-
-= link_to 'Show', @order
-\|
-= link_to 'Back', orders_path

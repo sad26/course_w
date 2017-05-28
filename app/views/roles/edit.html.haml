@@ -1,7 +1,14 @@
-%h1 Editing role
+=breadcrumb_tag do
+  %li.active
+    = t('headers.roles.edit')
+  %li
+    = link_to 'Роль', @role
+  %li
+    = link_to 'Роли', roles_path
+  %li
+    Администрирование
+
+.page-header
+  %h1= t("app.roles.edit")
 
 = render 'form'
-
-= link_to 'Show', @role
-\|
-= link_to 'Back', roles_path

@@ -2,9 +2,9 @@ module SideBarHelper
   def side_bar_items(ru)
     result = []
     result << {
-      :name => 'Сслыка без детей',
+      :name => 'На главную',
       :icon => 'list',
-      :controller => :welcome, 
+      :controller => :welcome,
       :action => :index
     }
     result << {
@@ -16,32 +16,33 @@ module SideBarHelper
        :icon => 'users',
        :class => 'long'},
       {:name => 'Добавление',
-       :controller => :users, :action => :new,
+       :controller => :users, :action => :new_by_admin,
        :icon => 'user-plus'},
       {:name => 'Роли',
        :controller => :roles, :action => :index,
        :icon => 'align-center',
        :class => 'long'},
-    ]} 
+    ]}
     result << {
-      :name => 'Заголовок ссылок',
-      :icon => 'search-plus',
+      :name => 'Таксопарк',
+      :icon => 'taxi',
       :children => [
-      {:name => 'Ссылка ребёнок',
-       :controller => :welcome, :action => :index,
-       :icon => 'binoculars'},
-      {:name => 'Ссылка ребёнок',
-       :controller => :welcome, :action => :index,
-       :icon => 'search',
+      {:name => 'Водители',
+       :controller => :drivers, :action => :index,
+       :icon => 'drivers-license',
+       :class => 'long'},
+      {:name => 'Заказы',
+       :controller => :orders, :action => :index,
+       :icon => 'sticky-note',
        :class => 'long'}
-    ]} 
+    ]}
     result
   end
-  
+
   def is_open?(ctr, act)
     case ctr.to_s
-    when 'users', 'roles'
-      ctr.to_s == controller_name.to_s  
+    when 'users', 'roles', 'drivers', 'orders'
+      ctr.to_s == controller_name.to_s
     else
       false
     end

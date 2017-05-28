@@ -1,9 +1,9 @@
 class WelcomeController < ApplicationController
   skip_before_action :require_login, except: [:destroy]
   skip_before_action :check_app_auth
-  
+
   def index
-  end 
+  end
 
   def new
     @user = User.new
@@ -28,5 +28,5 @@ class WelcomeController < ApplicationController
     @current_user_object = current_user
     @current_user_login = @current_user_object.email
     @current_role_user = RoleUser.where(id: params['bad_user_role']).first
-  end  
+  end
 end

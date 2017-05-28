@@ -1,27 +1,54 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = @driver.last_name + " " + @driver.first_name + " " + @driver.patronymic
+  %li
+    = link_to 'Водители', drivers_path
+  %li
+    Таксопарк
 
-%p
-  %b Last name:
-  = @driver.last_name
-%p
-  %b First name:
-  = @driver.first_name
-%p
-  %b Patronymic:
-  = @driver.patronymic
-%p
-  %b Date of birth:
-  = @driver.date_of_birth
-%p
-  %b Itn:
-  = @driver.itn
-%p
-  %b Passport:
-  = @driver.passport
-%p
-  %b Automobile:
-  = @driver.automobile
+%h1= @driver.last_name + " " + @driver.first_name + " " + @driver.patronymic
 
-= link_to 'Edit', edit_driver_path(@driver)
-\|
-= link_to 'Back', drivers_path
+
+.row
+  .col-md-12
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+            = Driver.human_attribute_name(:last_name)
+            = Driver.human_attribute_name(:first_name)
+            = Driver.human_attribute_name(:patronymic)
+        %tbody
+          %td.center
+            = @driver.last_name
+            = @driver.first_name
+            = @driver.patronymic
+.row
+  .col-md-4
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+            = Driver.human_attribute_name(:passport)
+        %tbody
+          %td.center= @driver.passport
+  .col-md-4
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+            = Driver.human_attribute_name(:itn)
+        %tbody
+          %td.center= @driver.itn
+  .col-md-4
+    %table.table.table-striped
+      %thead
+        %tr
+          %th
+            = Driver.human_attribute_name(:automobile_id)
+        %tbody
+          %td.center
+            - if @driver.automobile.nil?
+              = '-'
+            - else
+              = "#{@driver.automobile.automobile_model}, #{@driver.automobile.state_number} [#{@driver.automobile.automobile_type}]"
