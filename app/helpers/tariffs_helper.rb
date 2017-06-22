@@ -5,14 +5,16 @@ module TariffsHelper
     end
   end
 
-  def new_tariff_form(form)
+  def new_tariff_form(form, vals = nil)
+    @tar_vals = vals
     form.fields_for(:tariff, Tariff.new) do |fr|
       render 'orders/one_tariff_form', fr: fr
     end
   end
 
-  def exist_tariff_form(form)
-    form.fields_for(:tariff) do |fr|
+  def exist_tariff_form(form, tariff = nil, vals = nil)
+    @tar_vals = vals
+    form.fields_for(:tariff, tariff) do |fr|
       render 'orders/one_tariff_form', fr: fr
     end
   end

@@ -5,14 +5,16 @@ module AutomobilesHelper
     end
   end
 
-  def new_automobile_form(form)
+  def new_automobile_form(form, vals = nil)
+    @auto_vals = vals
     form.fields_for(:automobile, Automobile.new) do |fr|
       render 'orders/one_automobile_form', fr: fr
     end
   end
 
-  def exist_automobile_form(form)
-    form.fields_for(:automobile) do |fr|
+  def exist_automobile_form(form, automobile = nil, vals = nil)
+    @auto_vals = vals
+    form.fields_for(:automobile, automobile) do |fr|
       render 'orders/one_automobile_form', fr: fr
     end
   end

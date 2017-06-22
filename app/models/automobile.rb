@@ -2,6 +2,8 @@ class Automobile < ActiveRecord::Base
   has_many :drivers, dependent: :destroy
   has_many :orders
 
+  TYPES = ["Бизнес", "Эконом"]
+
   validates :automobile_model, length: {minimum: 5, maximum: 30}
   validates :automobile_type, inclusion: {in: ["Бизнес", "Эконом"]}
   validates :state_number, format: {with: /(а|в|е|к|м|н|о|р|с|т|у|х){2}\d{3}\d{2,3}/}, uniqueness: true

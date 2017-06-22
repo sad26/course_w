@@ -36,13 +36,14 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @cur = @order.automobile
+    @cur2 = @order.tariff
   end
 
   # POST /orders
   # POST /orders.json
   def create
     @order = Order.new(order_params)
-
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Заказ успешно создан.' }
@@ -57,11 +58,25 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
+    @cur = @order.automobile
+    @cur2 = @order.tariff
     respond_to do |format|
       if @order.update(order_params)
         format.html { redirect_to @order, notice: 'Заказ успешно обновлен.' }
         format.json { render :show, status: :ok, location: @order }
       else
+        if (@new = !(params[:order][:automobile_id].present?))
+          @cur_params = order_params[:automobile_attributes]
+          @vals = {:automobile_model => @cur.automobile_model,
+            :automobile_type => @cur.automobile_type,
+            :state_number => @cur.state_number, :color => @cur.color,
+            :release => @cur.release}
+          end
+        if (@new2 = !(params[:order][:tariff_id].present?))
+          @cur_params2 = order_params[:tariff_attributes]
+          @vals2 = {:name => @cur2.name, :time_of_day => @cur2.time_of_day,
+            :range => @cur2.range, :price_per_kilometer => @cur2.price_per_kilometer}
+        end
         format.html { render :edit }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end

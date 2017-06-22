@@ -20,6 +20,7 @@ class DriversController < ApplicationController
 
   # GET /drivers/1/edit
   def edit
+    @cur = @driver.automobile
   end
 
   # POST /drivers
@@ -41,11 +42,20 @@ class DriversController < ApplicationController
   # PATCH/PUT /drivers/1
   # PATCH/PUT /drivers/1.json
   def update
+    @cur = @driver.automobile
     respond_to do |format|
       if @driver.update(driver_params)
         format.html { redirect_to @driver, notice: 'Водитель успешно обновлен.' }
         format.json { render :show, status: :ok, location: @driver }
       else
+        if (@new = !(params[:driver][:automobile_id].present?))
+          @cur_params = driver_params[:automobile_attributes]
+          @vals = {:automobile_model => @cur.automobile_model,
+            :automobile_type => @cur.automobile_type,
+            :state_number => @cur.state_number, :color => @cur.color,
+            :release => @cur.release}
+        end
+
         format.html { render :edit }
         format.json { render json: @driver.errors, status: :unprocessable_entity }
       end

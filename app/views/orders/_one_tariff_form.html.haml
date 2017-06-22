@@ -2,24 +2,39 @@
 .col-md-12
   .form-group
     = fr.label :name
-    = fr.text_field :name, class: 'form-control'
+    - if @tar_vals
+      = fr.text_field :name, class: 'form-control', value: @tar_vals[:name]
+    - else
+      = fr.text_field :name, class: 'form-control'
     = fr.error_messages_for(:name)
 .col-md-12
   .form-group
     = fr.label :time_of_day
-    = fr.select :time_of_day, ["День", "Ночь"],
-    {include_blank: true}, {class: 'form-control'}
+    - if @tar_vals
+      = fr.select :time_of_day, options_for_select(["День", "Ночь"], @tar_vals[:time_of_day]),
+      {include_blank: true}, {class: 'form-control'}
+    - else
+      = fr.select :time_of_day, ["День", "Ночь"],
+      {include_blank: true}, {class: 'form-control'}
+
     = fr.error_messages_for(:time_of_day)
 .col-md-12
   .form-group
     = fr.label :range
-    = fr.select :range, ["в пределах МКАД", "за МКАД", "Подмосковье"],
-    {include_blank: true},  {class: 'form-control'}
+    - if @tar_vals
+      = fr.select :range, options_for_select(["в пределах МКАД", "за МКАД", "Подмосковье"],
+       @tar_vals[:range]), {include_blank: true},  {class: 'form-control'}
+    - else
+      = fr.select :range, ["в пределах МКАД", "за МКАД", "Подмосковье"],
+      {include_blank: true},  {class: 'form-control'}
     = fr.error_messages_for(:range)
 .col-md-12
   .form-group
     = fr.label :price_per_kilometer
     .input-group
-      = fr.text_field :price_per_kilometer, class: 'form-control'
+      - if @tar_vals
+        = fr.text_field :price_per_kilometer, class: 'form-control', value: @tar_vals[:price_per_kilometer]
+      - else
+        = fr.text_field :price_per_kilometer, class: 'form-control'
       %span.input-group-addon
         %span.glyphicon.glyphicon-ruble

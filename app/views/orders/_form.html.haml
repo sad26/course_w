@@ -40,9 +40,9 @@
         -# При выборе текущего авто, его можно изменять, при выборе нового,
         -# поля для него скрываются, при выборе пустоты в авто -
         -# можно создать новый.
-        = f.select :automobile_id, automobile_options(f.object.automobile_id),
+        = f.select :automobile_id, automobile_options(@cur.try(:id)),
         {include_blank: true}, class: 'form-control automobile-select',
-        "data-current-id": f.object.automobile_id
+        "data-current-id": @cur.try(:id)
         = f.error_messages_for(:automobile_id)
     .col-md-6
       .form-group
@@ -51,25 +51,29 @@
         -# При выборе текущего тарифа, его можно изменять, при выборе нового,
         -# поля для него скрываются, при выборе пустоты в тарифе -
         -# можно создать новый.
-        = f.select :tariff_id, tariff_options(f.object.tariff_id),
+        = f.select :tariff_id, tariff_options(@cur2.try(:id)),
         {include_blank: true}, class: 'form-control tariff-select',
-        "data-current-id": f.object.tariff_id
+        "data-current-id": @cur2.try(:id)
         = f.error_messages_for(:tariff_id)
 
   .row
     .col-md-6
       %fieldset.center
         %legend Поля для автомобиля
-        .left.automobile-main-fields{"data-content-new": "#{new_automobile_form(f)}",
-          "data-content-exist": "#{exist_automobile_form(f)}"}
-          = f.fields_for(:automobile) do |fr|
-            = render 'orders/one_automobile_form', fr: fr
+        .left.automobile-main-fields{"data-content-new": "#{new_automobile_form(f, @cur_params)}",
+          "data-content-exist": "#{exist_automobile_form(f, @cur, @vals)}"}
+          - if @new
+            = new_automobile_form(f, @cur_params)
+          - else
+            = exist_automobile_form(f, @cur, @vals)
     .col-md-6
       %fieldset.center
         %legend Поля для тарифа
-        .left.tariff-main-fields{"data-content-new": "#{new_tariff_form(f)}",
-          "data-content-exist": "#{exist_tariff_form(f)}"}
-          = f.fields_for(:tariff) do |fr|
-            = render 'orders/one_tariff_form', fr: fr
+        .left.tariff-main-fields{"data-content-new": "#{new_tariff_form(f, @cur_params2)}",
+          "data-content-exist": "#{exist_tariff_form(f, @cur2, @vals2)}"}
+          - if @new2
+            = new_tariff_form(f, @cur_params2)
+          - else
+            = exist_tariff_form(f, @cur2, @vals2)
   .actions
     = f.submit nil, class: 'btn btn-primary', id: 'save'
